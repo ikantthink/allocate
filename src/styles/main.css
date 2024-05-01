@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+:root {
+
+  /* colors */
+  --allocate-300--brand: #80ffde;
+  --black-brand: #121212;
+  --white: white;
+  --blue--300-brand: #0c13f2;
+  --grey--grey-950: #1e1e1e;
+  --blue--100: #f6f8fe;
+  --black: black;
+  --grey--grey-700: #545454;
+  --grey--grey-300: #c5c5c5;
+  --text: #a2a2a2;
+
+  /* fonts */
+  font-family: Arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--black-brand);
+  color: var(--text);
+}
+
+a {
+  font-weight: 700;
+  color: var(--allocate-300--brand);
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Abel", sans-serif;
+  color: var(--white);
+}
+
+button {
+  outline: none;
+  border: 1px solid var(--allocate-300--brand);
+  color: var(--allocate-300--brand);
+  letter-spacing: 0;
+  text-transform: none;
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 16px;
+  text-decoration: none;
+  transition: all .2s;
+  display: inline-block;
+  box-shadow: 0 2px var(--black);
+}
+
+button:hover {
+  background-color: var(--allocate-300--brand);
+  color: var(--black-brand);
+  cursor: pointer;
+}
