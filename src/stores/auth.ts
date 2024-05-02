@@ -1,90 +1,73 @@
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { supabase } from '@/js/supabase'
+import { supabase } from '../js/supabase'
+
+type SupabaseData = {
+  data: any | null;
+  error: any;
+}
 
 type User = {
-  app_metadata: object
-  aud: string 
-  confirmed_at: Date
-  created_at: Date
-  email: string
-  email_confirmed_at: Date
-  id: string
-  identities: []
-  is_anonymous: boolean
-  last_sign_in_at: Date
-  phone: string
-  role: string
-  updated_at: Date
-  user_metadata: object
+  app_metadata?: object;
+  aud?: string;
+  confirmed_at?: any;
+  created_at?: string;
+  email?: string;
+  email_confirmed_at?: string;
+  id: string;
+  identities?: any[];
+  is_anonymous?: boolean;
+  last_sign_in_at?: string;
+  phone?: string;
+  role?: string;
+  updated_at?: string;
+  user_metadata?: object;
 }
 
-type Session = {
-  access_token: string
-  expires_at: number
-  expires_in: number
-  refresh_token: string
-  token_type: string
-}
+export const useAuthStore = defineStore('AuthStore', () => {
+  const user = ref<User | null>(null)
+  const session = ref<object | null>(null)
+  const redirect_path = ref('')
 
-type State = {
-  user: User | null,
-  session: Session | null,
-  redirect_path: string
-}
-
-export const useAuthStore = defineStore('AuthStore', {
-  state: (): State => ({
-    user: null,
-    session: null,
-    redirect_path: ''
-  }),
-  actions: {
-    async login (email: string, password: string) {
-      try {
-        const authed = await supabase.auth.signInWithPassword({ email: email, password: password })
-        if (authed.error) return authed.error
-        if (authed.data) {
-          this.user = Object.assign({}, authed.data.user)
-          this.session = Object.assign({}, authed.data.session)
-        }
-        return authed
-      } catch (error) {
-        return error
+    async function login (email: string, password: string) : Promise<SupabaseData> {
+      const authed = await supabase.auth.signInWithPassword({ email: email, password: password })
+      if (authed.error) return authed
+      if (authed.data) {
+        user.value = authed.data.user
+        session.value = authed.data.session
       }
-    },
-    async logout () {
-      if (!this.user) {
+      return authed
+    }
+
+    async function logout (): Promise<boolean> {
+      if (!user.value) {
         return true
       }
-      try {
-        const { error } = await supabase.auth.signOut();
-        if (error) return false
-        this.user = null
-        this.session = null
-        return true
-      } catch (error) {
-        console.error(error)
-        return false
-      }
-    },
-    async isLoggedIn() {
+      const { error } = await supabase.auth.signOut();
+      if (error) return false
+      user.value = null
+      session.value = null
+      return true
+    }
+
+    async function isLoggedIn(): Promise<boolean> {
       const is_auth = await supabase.auth.getSession()
       if (is_auth.data.session) {
-        this.user = Object.assign({}, is_auth.data.session.user)
-        delete is_auth.data.session.user
-        this.session = Object.assign({}, is_auth.data.session)
+        user.value = Object.assign({}, is_auth.data.session.user)
+        session.value = Object.assign({}, is_auth.data.session)
       }
       console.log('is_auth', is_auth)
-      return !!this.session
+      return !!session.value
     }
-  },
-  getters: {
-    getUser: state => {
-      return state.user
-    },
-    getSession: state => {
-      return state.session
-    },
-  },
-  persist: true
+  
+  
+    function getUser() {
+      return user.value
+    }
+
+    function getSession() {
+      return session.value
+    }
+
+    return { user, session, redirect_path, login, logout, isLoggedIn, getUser, getSession}
 })

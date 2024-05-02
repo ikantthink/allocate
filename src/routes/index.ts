@@ -1,7 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router'
 import protectedRoutes from './protectedRoutes';
-import { supabase } from '@/js/supabase'
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '../stores/auth';
 
 const routes = [
   // Public Routes
@@ -33,7 +32,7 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
   const authed = await authStore.isLoggedIn()
-  console.log('authed', authed)
+  console.log('authed', authed, from)
   // auth is required
   if (to.matched.some((record) => record.meta.authReq)) {
     if (!authed) {

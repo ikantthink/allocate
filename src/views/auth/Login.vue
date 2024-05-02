@@ -52,8 +52,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import Logo from '@/components/Logo.vue';
-import { useAuthStore } from '@/stores/auth';
+import Logo from '../../components/Logo.vue';
+import { useAuthStore } from '../../stores/auth';
 const authStore = useAuthStore();
 const router = useRouter();
 const email = ref('');
@@ -62,16 +62,15 @@ const feedback = ref('');
 const loading = ref(false);
 
 async function Login() {
-  console.log('login');
   loading.value = true;
   setTimeout(async () => {
     const auth = await authStore.login(email.value, password.value);
     console.log('auth from login.vue', auth);
-    if (auth) {
+    if (auth.data && !auth.error) {
       router.push('/');
     } else {
       loading.value = false;
-      feedback.value = 'Something went wrong!';
+      feedback.value = auth.error.message;
       setTimeout(() => {
         feedback.value = '';
       }, 2500);

@@ -9,7 +9,9 @@
         </nav>
       </div>
       <div class="user">
-        <div class="email">{{ authStore.user.email }}</div>
+        <div class="email">
+          {{ authStore.user?.email ? authStore.user?.email : 'User' }}
+        </div>
         <div class="logout" @click="Logout()">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <title>logout</title>
@@ -29,8 +31,8 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
-import Logo from '@/components/Logo.vue';
-import { useAuthStore } from '@/stores/auth';
+import Logo from '../components/Logo.vue';
+import { useAuthStore } from '../stores/auth';
 const authStore = useAuthStore();
 const router = useRouter();
 
