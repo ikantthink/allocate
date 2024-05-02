@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import protectedRoutes from './protectedRoutes';
-//import { supabase } from '@/js/supabase';
-//import { useAuthStore } from '@/stores/auth';
+import { supabase } from '@/js/supabase'
+import { useAuthStore } from '@/stores/auth';
 
 const routes = [
   // Public Routes
@@ -12,7 +12,7 @@ const routes = [
   },
   // Private Routes
   {
-    path: '/layout',
+    path: '/',
     name: 'Layout',
     redirect: '/welcome',
     component: () => import('../views/Layout.vue'),
@@ -30,19 +30,24 @@ const router = createRouter({
 });
 
 // navigation guard to check for logged in users
-// router.beforeEach(async (to, from, next) => {
-//   const auth = useAuthStore();
-  
-//   // Main catch
-//   if (to.matched.some((record) => record.meta.authReq)) {
-//     if (!auth.user) {
-//       // Set url path to return to after authentication
-//       auth.redirect_path = to.path;
-//       next('/login');
-//     } else {
-//       next();
-//     }
-//   }
-// });
+router.beforeEach(async (to, from, next) => {
+  const authStore = useAuthStore();
+  const authed = await authStore.isLoggedIn()
+  console.log('authed', authed)
+  // auth is required
+  if (to.matched.some((record) => record.meta.authReq)) {
+    if (!authed) {
+      // Set url path to return to after authentication
+      authStore.redirect_path = to.path;
+      next('/login')
+    } else {
+      next()
+    }
+  } 
+  // auth not required
+  else {
+    next()
+  }
+});
 
 export default router;
