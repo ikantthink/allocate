@@ -80,7 +80,7 @@ async function Logout() {
       font-size: 2em;
       height: inherit;
       width: 80px;
-      background: var(--blue--300-brand);
+      background: var(--brand-secondary);
       cursor: pointer;
 
       svg {
@@ -89,7 +89,7 @@ async function Logout() {
       }
 
       &:hover {
-        background: var(--allocate-300--brand);
+        background: var(--brand);
         color: var(--black-brand);
         font-weight: 400;
       }
@@ -109,7 +109,7 @@ nav {
   }
 
   a.router-link-exact-active {
-    color: var(--allocate-300--brand);
+    color: var(--brand);
   }
 }
 

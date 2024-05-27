@@ -1,22 +1,27 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Prompt:wght@300;400;500;600;700;800;900&display=swap");
 
 :root {
   /* colors */
-  --allocate-300--brand: #80ffde;
+  --brand: #c3bb97;
+  --brand-secondary: #739f4d;
   --black-brand: #121212;
   --white: white;
-  --blue--300-brand: #0c13f2;
   --grey--grey-950: #1e1e1e;
   --blue--100: #f6f8fe;
   --black: black;
   --grey--grey-700: #545454;
   --grey--grey-300: #c5c5c5;
-  --text: #a2a2a2;
   --error: #ffa280;
 
+  --background: #fff;
+  --text: #a2a2a2;
+
+  /* dark theme */
+  --dark-background: #222;
+  --dark-text: #eee;
+
   /* fonts */
-  font-family: "Lato", sans-serif;
+  font-family: "Prompt", sans-serif;
   font-weight: 300;
   font-style: normal;
   font-synthesis: none;
@@ -26,15 +31,12 @@
 }
 
 body {
-  background-color: var(--black-brand);
-  color: var(--text);
   margin: 0;
   padding: 0;
 }
 
 a {
   font-weight: 700;
-  color: var(--allocate-300--brand);
   text-decoration: none;
 }
 
@@ -44,14 +46,12 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Abel", sans-serif;
+  font-family: "Major Mono Display", "Prompt", sans-serif;
   color: var(--white);
 }
 
 button {
   outline: none;
-  border: 1px solid var(--allocate-300--brand);
-  color: var(--allocate-300--brand);
   letter-spacing: 0;
   text-transform: none;
   background-color: transparent;
@@ -67,8 +67,6 @@ button {
 }
 
 button:hover {
-  background-color: var(--allocate-300--brand);
-  color: var(--black-brand);
   cursor: pointer;
 }
 
@@ -78,12 +76,9 @@ select {
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
-  background: var(--black-brand);
-  border: 1px solid var(--allocate-300--brand);
   border-radius: 4px;
   box-sizing: border-box;
   transition: all 0.3s ease;
-  color: var(--blue--100);
   font-size: 1em;
   font-weight: 400;
   font-family: "Lato", sans-serif;
@@ -91,8 +86,6 @@ select {
 
 input:focus {
   outline: none;
-  border: 1px solid var(--blue--300-brand);
-  box-shadow: 0 0 0 2px var(--blue--300-brand);
 }
 
 /* Spinner */
@@ -108,7 +101,7 @@ input:focus {
 }
 
 .spinner .path {
-  stroke: var(--blue--300-brand);
+  stroke: var(--brand-secondary);
   stroke-linecap: round;
   animation: dash 1.5s ease-in-out infinite;
 }

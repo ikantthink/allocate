@@ -1,7 +1,8 @@
 <template>
-  <div class="page moving_background">
+  <div class="page">
+    <div class="moving_background"></div>
     <div class="login_wrapper">
-      <logo width="120px" height="120px" />
+      <logo width="160px" height="160px" />
       <h1>Login</h1>
       <form @submit.prevent="Login">
         <div>
@@ -87,6 +88,7 @@ async function Login() {
   height: 100vh;
 
   .login_wrapper {
+    z-index: 1;
     width: 400px;
     display: flex;
     flex-direction: column;
@@ -118,7 +120,7 @@ async function Login() {
       .loading_button {
         width: 70px;
         padding: 10px 20px;
-        background-color: var(--allocate-300--brand);
+        background-color: var(--brand);
       }
     }
 
@@ -131,23 +133,29 @@ async function Login() {
 }
 
 .moving_background {
-  background-image: url('/img/green-stack-trans.svg');
-  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background-image: url('/img/pattern_dark.jpg');
+  background-repeat: repeat;
   background-position: center 55%;
   background-size: 50%;
   animation: up_down 6s infinite;
   animation-timing-function: ease-in-out;
 }
 
-@media screen and (max-width: 400px) {
-  .moving_background {
-    background-size: 80%;
-  }
-}
+// @media screen and (max-width: 400px) {
+//   .moving_background {
+//     background-size: 80%;
+//   }
+// }
 
 @keyframes up_down {
   50% {
-    background-position: center 45%;
+    background-size: 53%;
   }
 }
 </style>

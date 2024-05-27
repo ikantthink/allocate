@@ -23,7 +23,7 @@ defineProps({
 
 <style scoped>
 .logo {
-  background-image: url('/img/allocate-logo.svg');
+  background-image: url('/img/leaf_dark.svg');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;

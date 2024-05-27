@@ -1,0 +1,42 @@
+body {
+  background-color: var(--dark-background);
+  color: var(--dark-text);
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--brand);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--dark-text);
+}
+
+button {
+  border: 1px solid var(--brand);
+  color: var(--brand);
+  box-shadow: 0 2px var(--black);
+}
+
+button:hover {
+  background-color: var(--brand);
+  color: var(--black-brand);
+}
+
+input,
+select {
+  background: var(--black-brand);
+  border: 1px solid var(--brand);
+  color: var(--blue--100);
+}
+
+input:focus {
+  border: 1px solid var(--brand-secondary);
+  box-shadow: 0 0 0 2px var(--brand-secondary);
+}
