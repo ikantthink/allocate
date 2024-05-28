@@ -67,11 +67,11 @@ async function Login() {
   setTimeout(async () => {
     const auth = await authStore.login(email.value, password.value);
     console.log('auth from login.vue', auth);
-    if (auth.data && !auth.error) {
+    if (auth.user && !auth.errors) {
       router.push('/');
     } else {
       loading.value = false;
-      feedback.value = auth.error.message;
+      feedback.value = auth.errors[0].message
       setTimeout(() => {
         feedback.value = '';
       }, 2500);

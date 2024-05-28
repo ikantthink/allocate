@@ -33,6 +33,9 @@ router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
   const authed = await authStore.isLoggedIn()
   console.log('authed', authed, from)
+  if (authed && to.name == 'Login') {
+    next('/')
+  }
   // auth is required
   if (to.matched.some((record) => record.meta.authReq)) {
     if (!authed) {
