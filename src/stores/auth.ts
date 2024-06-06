@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { supabase } from '../js/supabase'
 
 type User = {
-  id: 14,
+  id: number,
   email: string
   name: string
   username: string
